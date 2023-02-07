@@ -119,6 +119,7 @@ class Window(QWidget):
         frame_report.setStyleSheet('background-color: #FFFFFF')
         frame_report.setVisible(False)
 
+        # table report
         table = QTableView(frame_report)
         table.setGeometry(20, 220, 800, 450)
 
