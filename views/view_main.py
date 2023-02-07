@@ -1,5 +1,5 @@
 from PySide6.QtGui import QFont, QIcon
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QLabel, QLineEdit
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QLabel, QLineEdit, QTableView
 import sys
 
 
@@ -119,11 +119,58 @@ class Window(QWidget):
         frame_report.setStyleSheet('background-color: #FFFFFF')
         frame_report.setVisible(False)
 
+        table = QTableView(frame_report)
+        table.setGeometry(20, 220, 800, 450)
+
         # edit frame
         frame_edit = QFrame(self)
         frame_edit.setGeometry(170, 0, 830, 700)
         frame_edit.setStyleSheet('background-color: #FFFFFF')
         frame_edit.setVisible(False)
+
+        text_edit = QLabel('CPF', frame_edit)
+        text_edit.setGeometry(10, 60, 55, 16)
+        text_edit.setFont(font)
+
+        search_edit = QLineEdit(frame_edit)
+        search_edit.setGeometry(50, 60, 600, 22)
+        search_edit.setPlaceholderText('000.000.000-00')
+
+        button_edit = QPushButton('Edit', frame_edit)
+        button_edit.setFont(font)
+        button_edit.setGeometry(700, 60, 80, 22)
+
+        text_edit = QLabel('CPF', frame_edit)
+        text_edit.setGeometry(10, 10, 55, 16)
+        text_edit.setFont(font)
+
+        search_edit = QLineEdit(frame_edit)
+        search_edit.setGeometry(50, 10, 600, 22)
+        search_edit.setPlaceholderText('000.000.000-00')
+
+        text_edit = QLabel('Name', frame_edit)
+        text_edit.setGeometry(10, 110, 55, 16)
+        text_edit.setFont(font)
+
+        search_edit = QLineEdit(frame_edit)
+        search_edit.setGeometry(50, 110, 600, 22)
+        search_edit.setPlaceholderText('Name')
+
+        button_edit = QPushButton('Edit', frame_edit)
+        button_edit.setFont(font)
+        button_edit.setGeometry(700, 110, 80, 22)
+
+        text_edit = QLabel('Add', frame_edit)
+        text_edit.setGeometry(10, 160, 55, 16)
+        text_edit.setFont(font)
+
+        search_edit = QLineEdit(frame_edit)
+        search_edit.setGeometry(50, 160, 600, 22)
+        search_edit.setPlaceholderText('Rua X')
+
+        button_edit = QPushButton('Edit', frame_edit)
+        button_edit.setFont(font)
+        button_edit.setGeometry(700, 160, 80, 22)
 
         global frames
 
