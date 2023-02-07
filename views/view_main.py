@@ -1,5 +1,5 @@
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame
 import sys
 
 
@@ -13,6 +13,7 @@ class Window(QWidget):
         self.__define_form()
 
     def __define_form(self) -> None:
+        global frame_register, frame_search, frame_report, frame_edit
         font = QFont('../fonts/NTR-Regular.ttf')
         font.setPointSize(11)
 
@@ -54,17 +55,65 @@ class Window(QWidget):
                                       'font-weight:bold;')
         button_edit.clicked.connect(self.__show_edit_frame)
 
+        # register frame
+        frame_register = QFrame(self)
+        frame_register.setGeometry(170, 0, 830, 700)
+        frame_register.setStyleSheet('background-color: #FFFFFF')
+        frame_register.setVisible(False)
+
+        # search frame
+        frame_search = QFrame(self)
+        frame_search.setGeometry(170, 0, 830, 700)
+        frame_search.setStyleSheet('background-color: green')
+        frame_search.setVisible(False)
+
+        # report frame
+        frame_report = QFrame(self)
+        frame_report.setGeometry(170, 0, 830, 700)
+        frame_report.setStyleSheet('background-color: red')
+        frame_report.setVisible(False)
+
+        # edit frame
+        frame_edit = QFrame(self)
+        frame_edit.setGeometry(170, 0, 830, 700)
+        frame_edit.setStyleSheet('background-color: blue')
+        frame_edit.setVisible(False)
+
+        global frames
+
+        frames = (frame_register, frame_report, frame_search, frame_edit)
+
+    @staticmethod
+    def __hidden_frames() -> None:
+        global frames
+
+        for frame in frames:
+            if frame.isVisible():
+                frame.setVisible(False)
+
     def __show_register_frame(self) -> None:
-        print('reg')
+        global frame_register
+
+        self.__hidden_frames()
+        frame_register.setVisible(True)
 
     def __show_search_frame(self) -> None:
-        print('reg2')
+        global frame_search
+
+        self.__hidden_frames()
+        frame_search.setVisible(True)
 
     def __show_report_frame(self) -> None:
-        print('reg3')
+        global frame_report
+
+        self.__hidden_frames()
+        frame_report.setVisible(True)
 
     def __show_edit_frame(self) -> None:
-        print('reg4')
+        global frame_edit
+
+        self.__hidden_frames()
+        frame_edit.setVisible(True)
 
 
 if __name__ == '__main__':
