@@ -1,11 +1,18 @@
-from PySide6.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QLabel
+from PySide6.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QLabel, QMessageBox
 from PySide6.QtGui import QFont, QIcon
+from controllers import LoginController
 import sys
+
+LOGIN = False
 
 
 class Window(QWidget):
+    global LOGIN
+
     def __init__(self) -> None:
         super().__init__()
+
+        self.password_try_limit = 3
 
         self.setFixedSize(400, 600)
         self.setWindowTitle('Syscad :: Login')
@@ -29,10 +36,10 @@ class Window(QWidget):
         text_pass.setFont(font)
         text_pass.setGeometry(10, 320, 381, 41)
         text_pass.setEchoMode(QLineEdit.EchoMode.Password)
-        self.__define_button(font)
+        self.__define_button(font, text_user, text_pass)
         self.__define_images()
 
-    def __define_button(self, font: QFont) -> QPushButton:
+    def __define_button(self, font: QFont, user: QLineEdit, password: QLineEdit) -> QPushButton:
         login = QPushButton('Login', self)
         login.setFont(font)
         login.setGeometry(10, 390, 381, 41)
@@ -40,6 +47,8 @@ class Window(QWidget):
             'background-color: #1E90FF;'
             'color: #FFFFFF;'
             'font-weight:bold;')
+
+        login.clicked.connect(lambda : self.__validate_login(user, password))
         return login
 
     def __define_images(self) -> None:
@@ -53,14 +62,33 @@ class Window(QWidget):
         label_logo.setPixmap(pixmap_logo)
         label_logo.move(100, 10)
 
+    def __validate_login(self, user: QLineEdit, password: QLineEdit) -> bool:
+        global LOGIN
+        user_ = user.text()
+        pass_ = password.text()
+        if LoginController.validate_login(user_, pass_):
+            LOGIN = True
+            self.close()
+        else:
+            if self.password_try_limit >= 1:
+                self.password_try_limit -= 1
+                alert = QMessageBox()
+                alert.setText('Login or password are invalid!')
+                alert.exec()
+            else:
+                sys.exit(0)
+        return LoginController.validate_login(user_, pass_)
 
-def view_login() -> None:
+
+def view_login() -> bool:
+    global LOGIN
     app = QApplication.instance()
     if app is None:
         app = QApplication(sys.argv)
     window = Window()
     window.show()
     app.exec()
+    return LOGIN
 
 
 if __name__ == '__main__':
