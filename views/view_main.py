@@ -1,5 +1,5 @@
-from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame
+from PySide6.QtGui import QFont, QIcon
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QLabel, QLineEdit
 import sys
 
 
@@ -9,6 +9,8 @@ class Window(QWidget):
 
         self.setWindowTitle('Syscad :: Main')
         self.setGeometry(300, 300, 1000, 700)
+        app_icon = QIcon('../images/app.svg')
+        self.setWindowIcon(app_icon)
         self.setStyleSheet('background-color: #1E90FF;')
         self.__define_form()
 
@@ -60,6 +62,40 @@ class Window(QWidget):
         frame_register.setGeometry(170, 0, 830, 700)
         frame_register.setStyleSheet('background-color: #FFFFFF')
         frame_register.setVisible(False)
+
+        label_name = QLabel('Name', frame_register)
+        label_name.setGeometry(20, 50, 55, 16)
+        label_name.setFont(font)
+
+        label_address = QLabel('Address', frame_register)
+        label_address.setGeometry(20, 90, 55, 16)
+        label_address.setFont(font)
+
+        label_cpf = QLabel('CPF', frame_register)
+        label_cpf.setGeometry(20, 130, 55, 16)
+        label_cpf.setFont(font)
+
+        text_name = QLineEdit(frame_register)
+        text_name.setFont(font)
+        text_name.setGeometry(80, 50, 721, 22)
+
+        text_address = QLineEdit(frame_register)
+        text_address.setFont(font)
+        text_address.setGeometry(80, 90, 721, 22)
+
+        text_cpf = QLineEdit(frame_register)
+        text_cpf.setFont(font)
+        text_cpf.setGeometry(80, 130, 721, 22)
+
+        button_clear = QPushButton('Clear', frame_register)
+        button_clear.setFont(font)
+        button_clear.setGeometry(20, 650, 115, 22)
+
+        button_register = QPushButton('Register', frame_register)
+        button_register.setFont(font)
+        button_register.setGeometry(700, 650, 115, 22)
+
+
 
         # search frame
         frame_search = QFrame(self)
