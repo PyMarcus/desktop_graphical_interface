@@ -26,15 +26,18 @@ class Window(QWidget):
         space = QLineEdit(self)
         space.move(20, 50)
         space.setFont(font)
+        space.setPlaceholderText('Name')
 
         # password
-        label_name = QLabel('Password', self)
-        label_name.move(20, 80)
-        label_name.setFont(font)
+        label_password = QLabel('Password', self)
+        label_password.move(20, 80)
+        label_password.setFont(font)
 
-        space = QLineEdit(self)
-        space.move(20, 110)
-        space.setFont(font)
+        space2 = QLineEdit(self)
+        space2.move(20, 110)
+        space2.setFont(font)
+        space2.setPlaceholderText('Password')
+        space2.setEchoMode(QLineEdit.EchoMode.Password)
 
 
 if __name__ == '__main__':
