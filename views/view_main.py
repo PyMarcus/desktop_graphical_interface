@@ -95,24 +95,34 @@ class Window(QWidget):
         button_register.setFont(font)
         button_register.setGeometry(700, 650, 115, 22)
 
-
-
         # search frame
         frame_search = QFrame(self)
         frame_search.setGeometry(170, 0, 830, 700)
-        frame_search.setStyleSheet('background-color: green')
+        frame_search.setStyleSheet('background-color: #FFFFFF')
         frame_search.setVisible(False)
+
+        text_search = QLabel('Name', frame_search)
+        text_search.setGeometry(20, 50, 55, 16)
+        text_search.setFont(font)
+
+        text_name = QLineEdit(frame_search)
+        text_name.setFont(font)
+        text_name.setGeometry(80, 50, 600, 22)
+
+        button_register = QPushButton('Search', frame_search)
+        button_register.setFont(font)
+        button_register.setGeometry(700, 50, 80, 22)
 
         # report frame
         frame_report = QFrame(self)
         frame_report.setGeometry(170, 0, 830, 700)
-        frame_report.setStyleSheet('background-color: red')
+        frame_report.setStyleSheet('background-color: #FFFFFF')
         frame_report.setVisible(False)
 
         # edit frame
         frame_edit = QFrame(self)
         frame_edit.setGeometry(170, 0, 830, 700)
-        frame_edit.setStyleSheet('background-color: blue')
+        frame_edit.setStyleSheet('background-color: #FFFFFF')
         frame_edit.setVisible(False)
 
         global frames
