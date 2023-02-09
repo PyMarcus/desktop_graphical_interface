@@ -1,1 +1,1 @@
-from .view_login import view_login
+from .view_login import view_login, Window

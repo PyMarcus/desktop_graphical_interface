@@ -1,9 +1,6 @@
-from typing import Any, Tuple
-
+from typing import Any, Sequence
 import mysql.connector as mc
-from contextlib import contextmanager
 import configparser as cp
-
 from mysql.connector import MySQLConnection
 
 
@@ -17,35 +14,26 @@ class ReportDAO:
         return parser['development']
 
     @staticmethod
-    @contextmanager
     def connection() -> MySQLConnection | None:
         try:
             conn = mc.connect(host=ReportDAO.read_config().get('host'),
                               user=ReportDAO.read_config().get('user'),
                               db=ReportDAO.read_config().get('database'),
                               )
-            try:
-                yield conn
-            except Exception as e:
-                print(e)
-            finally:
-                conn.commit()
-                conn.close()
+            return conn
         except ConnectionError as e:
-            print(e)
+            pass
 
     @staticmethod
-    def select_all() -> Tuple[str | Any] | None:
+    def select_all() -> tuple[Sequence[Any], list[str | int | None | bool]]:
         with ReportDAO.connection() as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM clients;")
             result = cursor.fetchall()
             size = len(cursor.description)  # columns
             titles = [title[0] for title in cursor.description]
-            for lines in result:
-                yield lines, size, titles
+            return result, titles
 
 
 if __name__ == '__main__':
-    for n, s, t in ReportDAO.select_all():
-        print(n, s, t)
+    ...

@@ -1,5 +1,7 @@
-from PySide6.QtGui import QFont, QIcon
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QLabel, QLineEdit, QTableView
+from PySide2.QtGui import QFont, QIcon
+from PySide2.QtWidgets import QApplication, QWidget, QPushButton, QFrame, QLabel, QLineEdit, QTableView, QHeaderView
+from DAO import ReportDAO
+from models import CustomTableModel
 import sys
 
 
@@ -119,9 +121,21 @@ class Window(QWidget):
         frame_report.setStyleSheet('background-color: #FFFFFF')
         frame_report.setVisible(False)
 
+        # database
+        data = ReportDAO.select_all()
+
+        # model
+        model = CustomTableModel(data)
+
         # table report
         table = QTableView(frame_report)
         table.setGeometry(20, 220, 800, 450)
+        table.setModel(model)
+        table.setColumnWidth(1, 400)
+
+        titles = table.horizontalHeader()
+        titles.setSectionResizeMode(QHeaderView.Interactive)
+        titles.setStretchLastSection(True)
 
         # edit frame
         frame_edit = QFrame(self)
@@ -214,5 +228,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Window()
     window.show()
-    app.exec()
+    app.exec_()
     sys.exit(0)
