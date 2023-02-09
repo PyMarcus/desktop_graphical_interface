@@ -1,13 +1,11 @@
-from PySide6.QtWidgets import QApplication
-from views import view_login, Window
+from views import view_login, start
 import sys
 
 
 def load_system() -> None:
     success = view_login()
     if success:
-        print('ok')
-
+        start()
     sys.exit(0)
 
 

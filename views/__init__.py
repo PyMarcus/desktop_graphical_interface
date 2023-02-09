@@ -1,1 +1,2 @@
-from .view_login import view_login, Window
+from .view_login import view_login
+from .view_main import start

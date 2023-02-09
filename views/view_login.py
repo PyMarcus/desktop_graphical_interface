@@ -21,7 +21,7 @@ class Window(QWidget):
         self.__define_form()
 
     def __define_form(self) -> None:
-        font = QFont('../fonts/NTR-Regular.ttf')
+        font = QFont('fonts/NTR-Regular.ttf')
         font.setPointSize(11)
 
         # username
@@ -52,9 +52,9 @@ class Window(QWidget):
         return login
 
     def __define_images(self) -> None:
-        app_icon = QIcon('../images/app.svg')
+        app_icon = QIcon('images/app.svg')
         self.setWindowIcon(app_icon)
-        login_icon = QIcon('../images/user.svg')
+        login_icon = QIcon('images/user.svg')
 
         pixmap_logo = login_icon.pixmap(191, 191)
 

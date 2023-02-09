@@ -11,14 +11,14 @@ class Window(QWidget):
 
         self.setWindowTitle('Syscad :: Main')
         self.setGeometry(300, 300, 1000, 700)
-        app_icon = QIcon('../images/app.svg')
+        app_icon = QIcon('images/app.svg')
         self.setWindowIcon(app_icon)
         self.setStyleSheet('background-color: #1E90FF;')
         self.__define_form()
 
     def __define_form(self) -> None:
         global frame_register, frame_search, frame_report, frame_edit
-        font = QFont('../fonts/NTR-Regular.ttf')
+        font = QFont('fonts/NTR-Regular.ttf')
         font.setPointSize(11)
 
         # register
@@ -224,9 +224,14 @@ class Window(QWidget):
         frame_edit.setVisible(True)
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
+def start():
+    app = QApplication.instance()
+    if app is None:
+        app = QApplication(sys.argv)
     window = Window()
     window.show()
     app.exec_()
-    sys.exit(0)
+
+
+if __name__ == '__main__':
+    start()

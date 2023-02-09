@@ -1,6 +1,4 @@
-from ctypes import Union
 from typing import Any
-import PySide6
 from PySide2.QtCore import Qt, QAbstractTableModel, QModelIndex
 from PySide2.QtGui import QColor
 
